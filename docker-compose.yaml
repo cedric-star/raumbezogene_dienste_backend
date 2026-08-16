@@ -1,0 +1,43 @@
+services:
+  raumbezogene-dienste-martin:
+    build: ./container/martin/.
+    container_name: raumbezogene-dienste-martin
+    restart: always
+    networks:
+      - mynet
+  raumbezogene-dienste-spring:
+    build: ./container/spring/.
+    container_name: raumbezogene-dienste-spring
+    restart: always
+    depends_on:
+      - raumbezogene-dienste-db
+    environment:
+      APP_JWT_SECRET: ${APP_JWT_SECRET}
+      SPRING_DATASOURCE_URL: jdbc:postgresql://raumbezogene-dienste-db:5432/postgres
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+      POSTGRES_DB: postgres
+      JAVA_TOOL_OPTIONS: "-Duser.timezone=Europe/Berlin"
+      TZ: Europe/Berlin
+    networks:
+      - mynet
+
+  raumbezogene-dienste-db:
+    build: ./container/db/.
+    container_name: raumbezogene-dienste-db
+    restart: always
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      TZ: Europe/Berlin
+    volumes:
+      - ./db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - mynet
+
+networks:
+  mynet:
+    external: true

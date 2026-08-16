@@ -1,0 +1,5 @@
+connection_string:
+mbtiles:
+  paths:
+    - /app/map.mbtiles
+web_ui: enable-for-all
