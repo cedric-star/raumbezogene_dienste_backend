@@ -1,3 +1,5 @@
+CREATE EXTENSION IF NOT EXISTS postgis;
+
 CREATE TABLE IF NOT EXISTS users (
     id BIGSERIAL PRIMARY KEY,
     name VARCHAR(200) NOT NULL UNIQUE,
@@ -10,13 +12,8 @@ CREATE TABLE IF NOT EXISTS locations (
     title VARCHAR(200) NOT NULL,
     description TEXT,
 
-    coordinates GEOGRAPHY(POINT, 4326) NOT NULL, -- PostGIS Datentyp für Koordinaten
-    geo_data GEOMETRY, -- komplexe darstellung: punkt, line, polygon, multi-polygon
+    geo_data GEOMETRY -- komplexe darstellung: punkt, line, polygon, multi-polygon
 );
-
-
-
-
 
 
 -- init inserts:
@@ -24,18 +21,19 @@ INSERT INTO users (name, role, password)
 VALUES (
 'testadmin',
 'ADMIN',
-'$argon2id$v=19$m=65536,t=3,p=1$cPX+H2pnWK9TjVscv3Np3Q$2BxxtsEToGQ8oAIGSEd4/CA0ir3ZFNLLwn/K9/9SU6E',
+'$2a$10$WYqa6.61Zs6tYy93sVFC9uhEVwZDszD6QbiV6PrFphZYBpVo1rXGm'
 );
 
-INSERT INTO locations (title, description, coordinates, geo_data)
+INSERT INTO locations (title, description, geo_data)
 VALUES (
 'testinit',
 'das ist ein test',
-ST_GeomFromText('POLYGON((10.667 51.760, 10.680 51.760, 10.680 51.770, 10.667 51.770, 10.667 51.760))', 4326),
+ST_GeomFromText('POLYGON((10.667 51.760, 10.680 51.760, 10.680 51.770, 10.667 51.770, 10.667 51.760))', 4326)
 );
 
-INSERT INTO locations (title, description, coordinates, geo_data)
+INSERT INTO locations (title, description, geo_data)
 VALUES (
 'testinit der zweite',
 'das ist ein zweiter test',
-ST_SetSRID(ST_MakePoint(10.6745, 51.7652), 4326));
+ST_SetSRID(ST_MakePoint(10.6745, 51.7652), 4326)
+);
