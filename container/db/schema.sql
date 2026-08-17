@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS locations (
     description TEXT,
 
     geo_data GEOMETRY -- komplexe darstellung: punkt, line, polygon, multi-polygon
-);
+);p
 
 
 -- init inserts:
