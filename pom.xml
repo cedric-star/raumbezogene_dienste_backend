@@ -131,6 +131,12 @@
             <version>1.17</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20260719</version>
+        </dependency>
+
 
     </dependencies>
 

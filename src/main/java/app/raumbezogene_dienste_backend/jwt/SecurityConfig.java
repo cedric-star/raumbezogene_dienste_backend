@@ -50,7 +50,7 @@ public class SecurityConfig {
                         //login ohne token erreichbar
                         .requestMatchers("/login").permitAll()
                         //hier alle frei erreichbaren endpunkte
-                        .requestMatchers("/locations/getall").permitAll()
+                        .requestMatchers("/locations").permitAll()
                         //bei anderen brauch man ein token, nötige rolle wieder über preauthorize auf methodenebene festlegen
                         .anyRequest().authenticated()
                 )
