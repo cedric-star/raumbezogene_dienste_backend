@@ -12,15 +12,15 @@ public class LocationsController {
     LocationsRepo locationsRepo;
 
     @GetMapping()
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN'")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<String> getAllAsJson() { return locationsRepo.getAllAsJson(); }
 
     @PostMapping()
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN'")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<String> postAsJson(@RequestBody String body) { return locationsRepo.insertNewFromJson(body); }
 
     @PatchMapping()
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN'")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<String> patchFromJson(@RequestBody String body) { return locationsRepo.updateExistingFromJson(body); }
 
     @DeleteMapping("/{id}")
