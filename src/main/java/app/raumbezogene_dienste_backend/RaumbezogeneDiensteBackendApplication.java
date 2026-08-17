@@ -10,7 +10,6 @@ public class RaumbezogeneDiensteBackendApplication {
 
     public static void main(String[] args) {
         PasswordEncoder encoder = new BCryptPasswordEncoder();
-        System.out.println(encoder.encode("meinPasswort123"));
 
         SpringApplication.run(RaumbezogeneDiensteBackendApplication.class, args);
     }
