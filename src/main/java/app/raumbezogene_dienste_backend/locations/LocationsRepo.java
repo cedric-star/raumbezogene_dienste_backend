@@ -1,19 +1,11 @@
 package app.raumbezogene_dienste_backend.locations;
 
-
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import java.util.*;
 
 @Repository
@@ -37,7 +29,7 @@ public class LocationsRepo {
         try {
             return ResponseEntity.ok(jdbcTemplate.queryForObject(sql, String.class));
         } catch (Exception e) {
-            return ResponseEntity.internalServerError().body(e.getMessage());
+            return ResponseEntity.internalServerError().body("exception while getting locations: " + e.getMessage());
         }
     }
 
@@ -79,7 +71,7 @@ public class LocationsRepo {
             else { return ResponseEntity.internalServerError().body("no rows are affected"); }
 
         } catch (Exception e) {
-            return ResponseEntity.internalServerError().body("Exception while executing sql: " + e.getMessage());
+            return ResponseEntity.internalServerError().body("exception while inserting location: " + e.getMessage());
         }
     }
 
@@ -100,28 +92,28 @@ public class LocationsRepo {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("location with id: <" + id + "> does not exist");
         }
 
-        LinkedHashMap<String, String> setClauses = new LinkedHashMap<>();
-        List<Object> params = new ArrayList<>();
+        ArrayList<String> sqlBuilder = new ArrayList<>();
+        ArrayList<Object> params = new ArrayList<>();
 
         if (jo.has("title") && !jo.isNull("title") && !jo.getString("title").isBlank()) {
-            setClauses.put("title", "title = ?");
+            sqlBuilder.add("title = ?");
             params.add(jo.getString("title"));
         }
         if (jo.has("description") && !jo.isNull("description") && !jo.getString("description").isBlank()) {
-            setClauses.put("description", "description = ?");
+            sqlBuilder.add("description = ?");
             params.add(jo.getString("description"));
         }
         if (jo.has("geo_data") && !jo.isNull("geo_data")) {
-            setClauses.put("geo_data", "geo_data = ST_GeomFromGeoJSON(?)");
+            sqlBuilder.add("geo_data = ST_GeomFromGeoJSON(?)");
             params.add(jo.getJSONObject("geo_data").toString());
         }
 
-        if (setClauses.isEmpty()) {
+        if (sqlBuilder.isEmpty()) {
             return ResponseEntity.badRequest().body("no attributes match");
         }
 
         String sql = "UPDATE locations SET "
-                + String.join(", ", setClauses.values())
+                + String.join(", ", sqlBuilder)
                 + " WHERE id = ?";
         params.add(id);
 
@@ -133,10 +125,25 @@ public class LocationsRepo {
                 return ResponseEntity.internalServerError().body("no rows are affected");
             }
         } catch (Exception e) {
-            return ResponseEntity.internalServerError().body("exception while executing sql: " + e.getMessage());
+            return ResponseEntity.internalServerError().body("exception while updating location: " + e.getMessage());
         }
     }
 
+    public ResponseEntity<String> deleteById(int id) {
+        String checkForExisting = "SELECT COUNT(*) FROM locations WHERE id = ?";
+        Integer count = jdbcTemplate.queryForObject(checkForExisting, Integer.class, id);
+        if (count == null || count <= 0) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("location with id: <" + id + "> does not exist, nothing deleted");
+        }
 
+        String sql = "DELETE FROM locations WHERE id = ?";
 
+        try {
+            int rowsAffected = jdbcTemplate.update(sql, id);
+            if (rowsAffected < 1) return ResponseEntity.internalServerError().body("nothing deleted");
+            else return ResponseEntity.ok("delete successful");
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("exception while deleting location" + e.getMessage());
+        }
+    }
 }
