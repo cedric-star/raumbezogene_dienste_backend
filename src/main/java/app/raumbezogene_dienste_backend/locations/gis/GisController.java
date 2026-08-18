@@ -28,6 +28,7 @@ public class GisController {
     public GisController() {
         try (InputStream is = new ClassPathResource("data/metadaten.json").getInputStream()) {
             this.metadata = new String(is.readAllBytes(), StandardCharsets.UTF_8);
+            log.info("loaded static resource metadata.json");
         } catch (IOException e) {
             log.error(e.getMessage());
         }
