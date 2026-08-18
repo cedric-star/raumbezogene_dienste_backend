@@ -56,7 +56,7 @@ public class AuthController {
         private String password;
 
         public String getName() { return name; }
-        public void setUsername(String username) { this.name = name; }
+        public void setUsername(String name) { this.name = name; }
         public String getPassword() { return password; }
         public void setPassword(String password) { this.password = password; }
     }

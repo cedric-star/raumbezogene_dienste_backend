@@ -48,7 +48,7 @@ public class SecurityConfig {
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         //login ohne token erreichbar
-                        .requestMatchers("/login").permitAll()
+                        .requestMatchers("/login", "/gis/metadata").permitAll()
                         //bei anderen brauch man ein token, nötige rolle wieder über preauthorize auf methodenebene festlegen
                         .anyRequest().authenticated()
                 )

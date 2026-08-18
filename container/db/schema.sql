@@ -21,7 +21,7 @@ INSERT INTO users (name, role, password)
 VALUES (
 'testadmin',
 'ADMIN',
-'$2a$10$WYqa6.61Zs6tYy93sVFC9uhEVwZDszD6QbiV6PrFphZYBpVo1rXGm'
+'$2a$10$PxlGyBX0pLhNk4P4w1giHOXj8bHzEgPtICg93kQf7ECGYmKtaaMUe'
 );
 
 INSERT INTO locations (title, description, geo_data)

@@ -1,0 +1,68 @@
+{
+  "types": [
+    "Point",
+    "LineString",
+    "LinearRing",
+    "Polygon",
+    "MultiPoint",
+    "MultiLineString",
+    "MultiPolygon"
+  ],
+  "functions": [
+    {
+      "name": "ST_LineFromMultiPoint",
+      "inputs": 1,
+      "types": ["MultiPoint"]
+    },
+    {
+      "name": "ST_Area",
+      "inputs": 1,
+      "types": ["Polygon", "MultiPolygon"]
+    },
+    {
+      "name": "ST_Length",
+      "inputs": 1,
+      "types": ["LineString", "MultiLineString"]
+    },
+    {
+      "name": "ST_Union",
+      "inputs": 2,
+      "types": ["Polygon", "MultiPolygon"]
+    },
+    {
+      "name": "ST_Intersection",
+      "inputs": 2,
+      "types": ["Polygon", "MultiPolygon"]
+    },
+    {
+      "name": "ST_Intersects",
+      "inputs": 2,
+      "types": ["Polygon", "MultiPolygon"]
+    },
+    {
+      "name": "ST_Difference",
+      "inputs": 2,
+      "types": [
+        "LineString",
+        "LinearRing",
+        "Polygon",
+        "MultiPoint",
+        "MultiLineString",
+        "MultiPolygon"
+      ]
+    },
+    {
+      "name": "ST_Distance",
+      "inputs": 2,
+      "types": [
+        "Point",
+        "LineString",
+        "LinearRing",
+        "Polygon",
+        "MultiPoint",
+        "MultiLineString",
+        "MultiPolygon"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,269 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: Raumbetogene-Dienste
+meta:
+  id: wrk_220c70e2c64044828b01d4ebe355380b
+  created: 1787039469835
+  modified: 1787039469835
+  description: ""
+collection:
+  - name: auth/user
+    meta:
+      id: fld_a19285e114e14843a1de6f31221f1266
+      created: 1787044448393
+      modified: 1787044448393
+      sortKey: -1787044448393
+      description: ""
+    children:
+      - url: "{{ _.base_url }}login"
+        name: login
+        meta:
+          id: req_2d8ba3f8d73e43cda9e4ab5a7f3d6232
+          created: 1787039483422
+          modified: 1787044598525
+          isPrivate: false
+          description: ""
+          sortKey: -1787044455061
+        method: POST
+        body:
+          mimeType: application/json
+          text: |
+            {
+            	"name": "testadmin",
+            	"password": "my580dongbasispasswort!",
+            	"role": "USER"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}register"
+        name: register
+        meta:
+          id: req_dc0230c243124a3cac09a71427632d5c
+          created: 1787044428528
+          modified: 1787044541893
+          isPrivate: false
+          description: ""
+          sortKey: -1787044454961
+        method: GET
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name": "mynewuser",
+            	"password": "123!habibikdk"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: Authorization
+            value: Bearer {{ _.token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: locations
+    meta:
+      id: fld_6ca1ea5e9c84424993e3821d58cabc06
+      created: 1787044622638
+      modified: 1787044622638
+      sortKey: -1787044622638
+      description: ""
+    children:
+      - url: "{{ _.base_url }}locations"
+        name: get locations
+        meta:
+          id: req_ce635865f15046258bb4a14648b902e2
+          created: 1787043006075
+          modified: 1787044635828
+          isPrivate: false
+          description: ""
+          sortKey: -1787044627765
+        method: GET
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}locations"
+        name: new location
+        meta:
+          id: req_63d81aa996aa432fb5ef1f328c335b79
+          created: 1787043452150
+          modified: 1787044633273
+          isPrivate: false
+          description: ""
+          sortKey: -1787044627665
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"title": "neu",
+            	"description": "d",
+            	"geo_data": {
+            			"type": "Polygon",
+            			"coordinates": [
+            				[
+            					[
+            						10.667,
+            						51.76
+            					],
+            					[
+            						10.68,
+            						51.76
+            					],
+            					[
+            						10.68,
+            						51.77
+            					],
+            					[
+            						10.667,
+            						51.77
+            					],
+            					[
+            						10.667,
+            						51.76
+            					]
+            				]
+            			]
+            		}
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: Authorization
+            value: Bearer {{ _.token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}locations"
+        name: patch location
+        meta:
+          id: req_7a53b2523a8649448c2d057c83f000b9
+          created: 1787043985757
+          modified: 1787044630381
+          isPrivate: false
+          description: ""
+          sortKey: -1787044627565
+        method: PATCH
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"id": 2,
+            	"title": "lsjdf"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: Authorization
+            value: Bearer {{ _.token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}locations/3"
+        name: delete location
+        meta:
+          id: req_a5418c07d9c24c71b51d98798d2ab38c
+          created: 1787044263915
+          modified: 1787044627562
+          isPrivate: false
+          description: ""
+          sortKey: -1787044627465
+        method: DELETE
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: gis
+    meta:
+      id: fld_c5eb52452b8648e5b709af1c69620767
+      created: 1787044700699
+      modified: 1787044700699
+      sortKey: -1787044700699
+      description: ""
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_b58076ad9ac19c0d00dac6e2791496a4a34a7803
+    created: 1787039469842
+    modified: 1787039469842
+environments:
+  name: Base Environment
+  meta:
+    id: env_b58076ad9ac19c0d00dac6e2791496a4a34a7803
+    created: 1787039469840
+    modified: 1787039834744
+    isPrivate: false
+  data:
+    base_url: http://localhost:8080/
+    prod_url: https://raum-api.micedric.dpdns.org/
+  subEnvironments:
+    - name: local_raumbezogenedienste
+      meta:
+        id: env_691260417e8645e795e84b2daae165e8
+        created: 1787039772836
+        modified: 1787043086919
+        isPrivate: true
+        sortKey: 1787039772837
+      data:
+        base_url: http://localhost:8080/
+        token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0YWRtaW4iLCJpYXQiOjE3ODcwNDI5ODUsImV4cCI6MTc4NzA0NjU4NX0.jDU8s4gK3SDuHTjxFSYeokpFxhgCtiCugrZjmz5GceM
+      color: "#2495ff"
+    - name: prod_raumbezogenedienste
+      meta:
+        id: env_c3e677714ae64cf79fedf44096c444d6
+        created: 1787039791599
+        modified: 1787040510943
+        isPrivate: true
+        sortKey: 1787039791599
+      data:
+        base_url: https://raum-api.micedric.dpdns.org/
+        token: ey
+      color: "#ff2424"
