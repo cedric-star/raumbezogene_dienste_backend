@@ -1,14 +1,28 @@
 pipeline {
     agent any
 
-    triggers {
-        githubPush()
+    environment {
+        DEPLOY_HOST = 'host.containers.internal'
+        DEPLOY_USER = 'cedric'
+        DEPLOY_DIR  = '/home/cedric/raumbezogene_dienste_backend'
+        REPO_URL    = 'https://github.com/cedric-star/raumbezogene_dienste_backend.git'
     }
 
     stages {
-        stage('Testdatei ablegen') {
+        stage('Deploy on Host') {
             steps {
-                sh 'echo "Testlauf am $(date)" > /home/cedric/jenkins_test.txt'
+                sshagent(credentials: ['host-ssh-deplay']) {
+                    sh """
+                        ssh -o StrictHostKeyChecking=no ${DEPLOY_USER}@${DEPLOY_HOST} '
+                            if [ -d "${DEPLOY_DIR}/.git" ]; then
+                                cd ${DEPLOY_DIR} && git pull
+                            else
+                                git clone ${REPO_URL} ${DEPLOY_DIR}
+                            fi
+                            cd ${DEPLOY_DIR} && podman compose up raumbezogene-dienste-spring raumbezogene-dienste-db -d --build
+                        '
+                    """
+                }
             }
         }
     }
