@@ -19,7 +19,7 @@ pipeline {
                             else
                                 git clone ${REPO_URL} ${DEPLOY_DIR}
                             fi
-                            cd ${DEPLOY_DIR} && podman compose up raumbezogene-dienste-spring raumbezogene-dienste-db -d --build
+                            cd ${DEPLOY_DIR} && podman compose down && podman compose up raumbezogene-dienste-spring raumbezogene-dienste-db -d --build
                         '
                     """
                 }
