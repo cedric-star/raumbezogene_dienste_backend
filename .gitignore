@@ -36,3 +36,4 @@ build/
 /db_data/
 db_data/
 .env
+map.mbtiles

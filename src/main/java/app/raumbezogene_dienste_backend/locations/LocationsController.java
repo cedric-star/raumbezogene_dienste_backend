@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/locations")
 public class LocationsController {
+
     @Autowired
     LocationsRepo locationsRepo;
 
