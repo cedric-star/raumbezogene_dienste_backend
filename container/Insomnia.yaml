@@ -20,7 +20,7 @@ collection:
         meta:
           id: req_2d8ba3f8d73e43cda9e4ab5a7f3d6232
           created: 1787039483422
-          modified: 1787044598525
+          modified: 1787056046248
           isPrivate: false
           description: ""
           sortKey: -1787044455061
@@ -30,8 +30,7 @@ collection:
           text: |
             {
             	"name": "testadmin",
-            	"password": "my580dongbasispasswort!",
-            	"role": "USER"
+            	"password": "my580dongbasispasswort!"
             }
         headers:
           - name: Content-Type
@@ -89,7 +88,7 @@ collection:
         meta:
           id: req_ce635865f15046258bb4a14648b902e2
           created: 1787043006075
-          modified: 1787044635828
+          modified: 1787073953066
           isPrivate: false
           description: ""
           sortKey: -1787044627765
@@ -171,7 +170,7 @@ collection:
         meta:
           id: req_7a53b2523a8649448c2d057c83f000b9
           created: 1787043985757
-          modified: 1787044630381
+          modified: 1787074383815
           isPrivate: false
           description: ""
           sortKey: -1787044627565
@@ -180,8 +179,17 @@ collection:
           mimeType: application/json
           text: |-
             {
-            	"id": 2,
-            	"title": "lsjdf"
+            	"id": 1,
+            	"geo_data": {
+              "type": "Polygon",
+              "coordinates": [[
+                [10.6759, 51.7645],
+                [10.6765, 51.7645],
+                [10.6765, 51.7650],
+                [10.6759, 51.7650],
+                [10.6759, 51.7645]
+              ]]
+            }
             }
         headers:
           - name: Content-Type
@@ -228,6 +236,65 @@ collection:
       modified: 1787044700699
       sortKey: -1787044700699
       description: ""
+    children:
+      - url: "{{ _.base_url }}gis/metadata"
+        name: metadata
+        meta:
+          id: req_3400bc247e824c79b6dafe1678f66dca
+          created: 1787046921301
+          modified: 1787054797761
+          isPrivate: false
+          description: ""
+          sortKey: -1787046921301
+        method: GET
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}gis"
+        name: New Request
+        meta:
+          id: req_3e78a154c282419ca2f0200d5267b211
+          created: 1787058178486
+          modified: 1787116770647
+          isPrivate: false
+          description: ""
+          sortKey: -1787058178486
+        method: GET
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name": "ST_Difference",
+            	"inputs": [
+            		 1, 
+            		2
+            	]
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: Authorization
+            value: Bearer {{ _.token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
 cookieJar:
   name: Default Jar
   meta:
@@ -249,21 +316,21 @@ environments:
       meta:
         id: env_691260417e8645e795e84b2daae165e8
         created: 1787039772836
-        modified: 1787043086919
+        modified: 1787074482667
         isPrivate: true
         sortKey: 1787039772837
       data:
         base_url: http://localhost:8080/
-        token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0YWRtaW4iLCJpYXQiOjE3ODcwNDI5ODUsImV4cCI6MTc4NzA0NjU4NX0.jDU8s4gK3SDuHTjxFSYeokpFxhgCtiCugrZjmz5GceM
+        token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0YWRtaW4iLCJpYXQiOjE3ODcwNzQ0NjMsImV4cCI6MTc4NzA3ODA2M30.3SwKbpFZisOtsm_XwwZJTKC1vfjZoZ5jsgjgNZY5l34
       color: "#2495ff"
     - name: prod_raumbezogenedienste
       meta:
         id: env_c3e677714ae64cf79fedf44096c444d6
         created: 1787039791599
-        modified: 1787040510943
+        modified: 1787116756354
         isPrivate: true
         sortKey: 1787039791599
       data:
         base_url: https://raum-api.micedric.dpdns.org/
-        token: ey
+        token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0YWRtaW4iLCJpYXQiOjE3ODcxMTY3MzQsImV4cCI6MTc4NzEyMDMzNH0.hZEHyeDFDsf2cy-8asCTBkjh1G_CfiY5zwaYLZ5YZws
       color: "#ff2424"
