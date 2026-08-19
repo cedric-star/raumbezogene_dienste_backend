@@ -16,24 +16,49 @@ CREATE TABLE IF NOT EXISTS locations (
 );
 
 
--- init inserts:
-INSERT INTO users (name, role, password)
+
+---- Testdaten
+INSERT INTO locations (title, description, geo_data)
 VALUES (
-'testadmin',
-'ADMIN',
-'$2a$10$PxlGyBX0pLhNk4P4w1giHOXj8bHzEgPtICg93kQf7ECGYmKtaaMUe'
-);
+           'Hallescher Marktplatz',
+           'Zentraler Punkt in der Innenstadt von Halle',
+           ST_SetSRID(ST_MakePoint(11.974, 51.482), 4326)
+       );
 
 INSERT INTO locations (title, description, geo_data)
 VALUES (
-'testinit',
-'das ist ein test',
-ST_GeomFromText('POLYGON((10.667 51.760, 10.680 51.760, 10.680 51.770, 10.667 51.770, 10.667 51.760))', 4326)
-);
+           'Saale-Uferweg',
+           'Wanderweg entlang der Saale durch Halle',
+           ST_GeomFromText('LINESTRING(11.950 51.510, 11.965 51.495, 11.980 51.480, 11.990 51.465)', 4326)
+       );
 
 INSERT INTO locations (title, description, geo_data)
 VALUES (
-'testinit der zweite',
-'das ist ein zweiter test',
-ST_SetSRID(ST_MakePoint(10.6745, 51.7652), 4326)
-);
+           'Stadtpark-Rundweg',
+           'Rundweg um den Stadtpark in Halle',
+           ST_GeomFromText('LINESTRING(11.960 51.490, 11.970 51.488, 11.975 51.495, 11.965 51.498, 11.960 51.490)', 4326)
+       );
+INSERT INTO locations (title, description, geo_data)
+VALUES (
+           'Botanischer Garten',
+           'Gelände des Botanischen Gartens der Martin-Luther-Universität',
+           ST_GeomFromText('POLYGON((11.960 51.485, 11.970 51.484, 11.975 51.490, 11.965 51.492, 11.960 51.485))', 4326)
+       );
+INSERT INTO locations (title, description, geo_data)
+VALUES (
+           'Sehenswürdigkeiten Halle',
+           'Wichtige Sehenswürdigkeiten in Halle (Marktplatz, Händel-Haus, Dom)',
+           ST_GeomFromText('MULTIPOINT((11.974 51.482), (11.965 51.478), (11.970 51.484))', 4326)
+       );
+INSERT INTO locations (title, description, geo_data)
+VALUES (
+           'Straßenbahnnetz',
+           'Ausgewählte Straßenbahnlinien in Halle',
+           ST_GeomFromText('MULTILINESTRING((11.950 51.510, 11.965 51.495, 11.980 51.480), (11.960 51.515, 11.975 51.500, 11.990 51.485))', 4326)
+       );
+INSERT INTO locations (title, description, geo_data)
+VALUES (
+           'Parkanlagen',
+           'Verschiedene Grünflächen und Parks in Halle',
+           ST_GeomFromText('MULTIPOLYGON(((11.960 51.485, 11.970 51.484, 11.975 51.490, 11.965 51.492, 11.960 51.485)), ((11.990 51.470, 12.000 51.468, 12.005 51.475, 11.995 51.478, 11.990 51.470)))', 4326)
+       );
