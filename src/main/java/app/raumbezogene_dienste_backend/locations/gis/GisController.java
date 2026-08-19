@@ -42,6 +42,7 @@ public class GisController {
     }
 
     @GetMapping()
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<String> execGisFunction(@RequestBody String body) {
         return gisRepo.execGis(body);
     }

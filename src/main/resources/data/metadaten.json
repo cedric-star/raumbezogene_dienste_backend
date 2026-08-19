@@ -12,36 +12,43 @@
     {
       "name": "ST_LineFromMultiPoint",
       "inputs": 1,
+      "returnsObj": true,
       "types": ["MultiPoint"]
     },
     {
       "name": "ST_Area",
       "inputs": 1,
+      "returnsObj": false,
       "types": ["Polygon", "MultiPolygon"]
     },
     {
       "name": "ST_Length",
       "inputs": 1,
+      "returnsObj": false,
       "types": ["LineString", "MultiLineString"]
     },
     {
       "name": "ST_Union",
       "inputs": 2,
+      "returnsObj": true,
       "types": ["Polygon", "MultiPolygon"]
     },
     {
       "name": "ST_Intersection",
       "inputs": 2,
+      "returnsObj": true,
       "types": ["Polygon", "MultiPolygon"]
     },
     {
       "name": "ST_Intersects",
       "inputs": 2,
+      "returnsObj": false,
       "types": ["Polygon", "MultiPolygon"]
     },
     {
       "name": "ST_Difference",
       "inputs": 2,
+      "returnsObj": true,
       "types": [
         "LineString",
         "LinearRing",
@@ -54,6 +61,7 @@
     {
       "name": "ST_Distance",
       "inputs": 2,
+      "returnsObj": false,
       "types": [
         "Point",
         "LineString",
