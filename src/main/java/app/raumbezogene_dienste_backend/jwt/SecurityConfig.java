@@ -50,13 +50,14 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.configurationSource(request -> {
                     CorsConfiguration config = new CorsConfiguration();
-                    config.setAllowedOrigins(List.of(
+                    config.setAllowedOriginPatterns(List.of(
                             "http://localhost:5173",
                             "http://localhost:8080",
-                            "raum-martin.micedric.dpdns.org",
-                            "raum-api.micedric.dpdns.org",
-                            "raum-vue.micedric.dpdns.org",
-                            "**.raum-api.micedric.dpdns.org/**"
+                            "https://raum-martin.micedric.dpdns.org",
+                            "https://raum-api.micedric.dpdret.org",
+                            "https://raum-vue.micedric.dpdns.org",
+                            "https://*.raum-api.micedric.dpdns.org",
+                            "https://*.raum-api.micedric.dpdns.org/*"
                     ));
                     config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
                     config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
