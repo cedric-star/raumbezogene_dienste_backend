@@ -1,2 +1,12 @@
 services:
-  
+  raumbezogene-dienste-vue:
+    build: .
+    container_name: raumbezogene-dienste-vue
+    restart: always
+    networks:
+      - mynet
+
+
+  networks:
+    mynet:
+      external: true
