@@ -37,3 +37,5 @@ build/
 db_data/
 .env
 map.mbtiles
+vue
+vue/*
